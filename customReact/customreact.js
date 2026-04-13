@@ -10,7 +10,7 @@ function customRender(reactElement, conatiner){
     domElement.innerHTML = reactElement.children;
 
     for (const prop in reactElement.props) {
-        if(prop == reactElement.children) continue ;`~`
+        if(prop === 'children') continue ;
         domElement.setAttribute(prop, reactElement.props[prop]);
     }
     conatiner.appendChild(domElement);
