@@ -3,11 +3,19 @@ function App() {
   const [counter, setCounter] = useState(15);
 
   function addValue(){
-    setCounter(counter+1);
+    if(counter >= 20){
+      return;
+    } else {
+      setCounter(counter+1);
+    }
   }
 
   function removeValue(){
-    setCounter(counter-1);
+    if(counter <= 0){
+      return;
+    } else {
+      setCounter(counter-1);
+    }
   }
 
 
