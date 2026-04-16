@@ -1,9 +1,19 @@
 import React from 'react';
-
+import Parent from './parent';
 function App() {
+  const appStyle = {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        margin: 0,
+        fontFamily: 'Arial, sans-serif',
+    };
 
   return (
-    <h1>Hello World</h1>
+    <div style={appStyle}>
+      <Parent />  
+    </div>
   )
 }
 
