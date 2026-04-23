@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation</title>
+</head>
+<body>
+    <button onclick="handleClick()" id="btn">Counter 0</button>
+    <script>
+        function handleClick(){
+            const btn = document.getElementById("btn").innerHTML;
+            const currValue = btn.split(" ")[1];
+            const newCounter = parseInt(currValue)+1;
+            document.getElementById("btn").innerHTML = 'Counter '+newCounter;
+        }
+    </script>
+</body>
+</html>
