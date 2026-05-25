@@ -9,15 +9,15 @@ mongoose.connect("mongodb://127.0.0.1:27017/paytm")
     })
 
 const UserSchema = new mongoose.Schema({
-    firstName: {
+    firstname: {
         type: String,
         required: true
     },
-    lastName: {
+    lastname: {
         type: String,
         required: true,
     },
-    email: {
+    username: {
         type: String,
         required: true
     },

@@ -3,10 +3,10 @@ const router = express.Router();
 import { User } from '../db.js';
 
 
-router.post("/users", async (req, res) => {
+router.post("/signup", async (req, res) => {
     try {
-        const { fname, lname, email, password } = req.body;
-        const result = await User.create({ firstName: fname, lastName: lname, email, password });
+        const { firstname, lastname, username, password } = req.body;
+        const result = await User.create({ firstname, lastname, username, password });
         res.status(201).json({
             msg: "User created",
             result
@@ -19,36 +19,39 @@ router.post("/users", async (req, res) => {
     }
 })
 
-// Get all user
-router.get("/users", async(req, res) => {
+router.put("/changepassword/:username", async(req, res) => {
+    try {
+        const password = req.body.password;
+        const username = req.params.username;
 
-    try{
-        const result = await User.find({});
-
-        res.json({
-            result
+        const response = await User.findOneAndUpdate({username}, {$set: {password: password}} );
+        res.status(201).json({
+            msg: "Password updated",
+            response
         })
     } catch (err) {
         res.status(501).json({
             msg: err.message
         })
     }
+
 })
 
-
 // Get single user
-router.get("/users/:email", async(req, res) => {
+router.get("/signin", async(req, res) => {
 
     try{
-        const email = req.params.email;
-        const result = await User.findOne({email});
+        const {username, password} = req.body;
+        const result = await User.findOne({username, password});
 
         res.json({
+            msg: "User is allowed",
             result
         })
     } catch (err) {
         res.status(501).json({
-            msg: err.message
+            error: err.message,
+            msg: "Username or password is wrong"
         })
     }
 })
