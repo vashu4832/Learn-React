@@ -19,7 +19,6 @@ const signupBody = zod.object({
 router.post("/signup", async (req, res) => {
     try {
         const { success } = signupBody.safeParse(req.body);
-
         if (!success) {
             return res.status(400).json({
                 message: "Invalid inputs"
@@ -115,6 +114,28 @@ router.post("/signin", async (req, res) => {
         })
     }
 })
+
+router.get("/me", authMiddleware, async(req, res) => {
+
+    try {
+
+        const user = await User.findById(req.userId);
+
+        res.json({
+            firstname: user.firstname,
+            lastname: user.lastname,
+            username: user.username
+        });
+
+    } catch(err) {
+
+        res.status(500).json({
+            error: err.message
+        });
+
+    }
+
+});
 
 
 // Update route password/firstname/lastname
